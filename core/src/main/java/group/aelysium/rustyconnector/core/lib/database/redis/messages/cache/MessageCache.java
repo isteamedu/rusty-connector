@@ -6,6 +6,7 @@ import group.aelysium.rustyconnector.core.lib.hash.Snowflake;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class MessageCache {
     private final Snowflake snowflakeGenerator = new Snowflake();
@@ -59,7 +60,7 @@ public class MessageCache {
      * @return All currently cached messages.
      */
     public List<CacheableMessage> getMessages() {
-        return this.messages.values().stream().toList();
+        return this.messages.values().stream().collect(Collectors.toList());
     }
 
     /**
