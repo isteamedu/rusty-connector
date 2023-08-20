@@ -8,6 +8,7 @@ import io.lettuce.core.KeyValue;
 import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class GenericRedisMessage {
     private static final int protocolVersion = 1;
@@ -106,7 +107,7 @@ public class GenericRedisMessage {
     public static boolean validateParameters(List<String> requiredParameters, List<KeyValue<String, JsonPrimitive>> parametersToCheck) {
         List<String> keysToCheck = new ArrayList<>();
         parametersToCheck.forEach(entry -> keysToCheck.add(entry.getKey()));
-        List<String> matches = requiredParameters.stream().filter(keysToCheck::contains).toList();
+        List<String> matches = requiredParameters.stream().filter(keysToCheck::contains).collect(Collectors.toList());
         return requiredParameters.size() == matches.size();
     }
 
