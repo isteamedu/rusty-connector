@@ -49,11 +49,11 @@ public class RedisMessageServerRegisterRequest extends GenericRedisMessage {
             JsonPrimitive value = entry.getValue();
 
             switch (key) {
-                case ValidParameters.FAMILY_NAME -> this.familyName = value.getAsString();
-                case ValidParameters.SERVER_NAME -> this.serverName = value.getAsString();
-                case ValidParameters.SOFT_CAP -> this.softCap = value.getAsInt();
-                case ValidParameters.HARD_CAP -> this.hardCap = value.getAsInt();
-                case ValidParameters.WEIGHT -> this.weight = value.getAsInt();
+                case ValidParameters.FAMILY_NAME: this.familyName = value.getAsString(); break;
+                case ValidParameters.SERVER_NAME: this.serverName = value.getAsString(); break;
+                case ValidParameters.SOFT_CAP: this.softCap = value.getAsInt(); break;
+                case ValidParameters.HARD_CAP: this.hardCap = value.getAsInt(); break;
+                case ValidParameters.WEIGHT: this.weight = value.getAsInt(); break;
             }
         });
     }
@@ -68,11 +68,11 @@ public class RedisMessageServerRegisterRequest extends GenericRedisMessage {
             JsonPrimitive value = entry.getValue();
 
             switch (key) {
-                case ValidParameters.FAMILY_NAME -> this.familyName = value.getAsString();
-                case ValidParameters.SERVER_NAME -> this.serverName = value.getAsString();
-                case ValidParameters.SOFT_CAP -> this.softCap = value.getAsInt();
-                case ValidParameters.HARD_CAP -> this.hardCap = value.getAsInt();
-                case ValidParameters.WEIGHT -> this.weight = value.getAsInt();
+                case ValidParameters.FAMILY_NAME: this.familyName = value.getAsString(); break;
+                case ValidParameters.SERVER_NAME: this.serverName = value.getAsString(); break;
+                case ValidParameters.SOFT_CAP: this.softCap = value.getAsInt(); break;
+                case ValidParameters.HARD_CAP: this.hardCap = value.getAsInt(); break;
+                case ValidParameters.WEIGHT: this.weight = value.getAsInt(); break;
             }
         });
     }

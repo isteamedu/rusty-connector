@@ -29,7 +29,7 @@ public class RedisMessageFamilyRegister extends GenericRedisMessage {
             JsonPrimitive value = entry.getValue();
 
             switch (key) {
-                case ValidParameters.FAMILY_NAME -> this.familyName = value.getAsString();
+                case ValidParameters.FAMILY_NAME: this.familyName = value.getAsString(); break;
             }
         });
     }
@@ -44,7 +44,7 @@ public class RedisMessageFamilyRegister extends GenericRedisMessage {
             JsonPrimitive value = entry.getValue();
 
             switch (key) {
-                case ValidParameters.FAMILY_NAME -> this.familyName = value.getAsString();
+                case ValidParameters.FAMILY_NAME: this.familyName = value.getAsString(); break;
             }
         });
     }

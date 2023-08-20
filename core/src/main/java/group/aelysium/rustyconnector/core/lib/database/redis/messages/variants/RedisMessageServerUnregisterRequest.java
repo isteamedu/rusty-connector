@@ -34,8 +34,8 @@ public class RedisMessageServerUnregisterRequest extends GenericRedisMessage {
             JsonPrimitive value = entry.getValue();
 
             switch (key) {
-                case ValidParameters.FAMILY_NAME -> this.familyName = value.getAsString();
-                case ValidParameters.SERVER_NAME -> this.serverName = value.getAsString();
+                case ValidParameters.FAMILY_NAME: this.familyName = value.getAsString(); break;
+                case ValidParameters.SERVER_NAME: this.serverName = value.getAsString(); break;
             }
         });
     }
@@ -50,8 +50,8 @@ public class RedisMessageServerUnregisterRequest extends GenericRedisMessage {
             JsonPrimitive value = entry.getValue();
 
             switch (key) {
-                case ValidParameters.FAMILY_NAME -> this.familyName = value.getAsString();
-                case ValidParameters.SERVER_NAME -> this.serverName = value.getAsString();
+                case ValidParameters.FAMILY_NAME: this.familyName = value.getAsString(); break;
+                case ValidParameters.SERVER_NAME: this.serverName = value.getAsString(); break;
             }
         });
     }

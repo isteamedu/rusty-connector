@@ -34,8 +34,8 @@ public class RedisMessageSendPlayer extends GenericRedisMessage {
             JsonPrimitive value = entry.getValue();
 
             switch (key) {
-                case ValidParameters.TARGET_FAMILY_NAME -> this.targetFamilyName = value.getAsString();
-                case ValidParameters.PLAYER_UUID -> this.uuid = value.getAsString();
+                case ValidParameters.TARGET_FAMILY_NAME: this.targetFamilyName = value.getAsString(); break;
+                case ValidParameters.PLAYER_UUID: this.uuid = value.getAsString(); break;
             }
         });
     }
@@ -50,8 +50,8 @@ public class RedisMessageSendPlayer extends GenericRedisMessage {
             JsonPrimitive value = entry.getValue();
 
             switch (key) {
-                case ValidParameters.TARGET_FAMILY_NAME -> this.targetFamilyName = value.getAsString();
-                case ValidParameters.PLAYER_UUID -> this.uuid = value.getAsString();
+                case ValidParameters.TARGET_FAMILY_NAME: this.targetFamilyName = value.getAsString(); break;
+                case ValidParameters.PLAYER_UUID: this.uuid = value.getAsString(); break;
             }
         });
     }

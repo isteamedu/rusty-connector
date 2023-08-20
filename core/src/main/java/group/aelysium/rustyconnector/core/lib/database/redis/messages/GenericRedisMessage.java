@@ -187,18 +187,19 @@ public class GenericRedisMessage {
             if(this.address == null) throw new IllegalStateException("You must provide `address` when building a receivable RedisMessage!");
             if(this.origin == null) throw new IllegalStateException("You must provide `origin` when building a receivable RedisMessage!");
 
-            return switch (this.type) {
-                case PING, REG_ALL ->           new GenericRedisMessage(this.protocolVersion, this.rawMessage, this.privateKey, this.type, this.address, this.origin);
-                case REG ->       new RedisMessageServerRegisterRequest(this.protocolVersion, this.rawMessage, this.privateKey, this.address, this.origin, this.parameters);
-                case UNREG ->   new RedisMessageServerUnregisterRequest(this.protocolVersion, this.rawMessage, this.privateKey, this.address, this.origin, this.parameters);
-                case SEND ->                 new RedisMessageSendPlayer(this.protocolVersion, this.rawMessage, this.privateKey, this.address, this.origin, this.parameters);
-                case PONG ->                 new RedisMessageServerPong(this.protocolVersion, this.rawMessage, this.privateKey, this.address, this.origin, this.parameters);
-                case TPA_QUEUE_PLAYER -> new RedisMessageTPAQueuePlayer(this.protocolVersion, this.rawMessage, this.privateKey, this.address, this.origin, this.parameters);
-                case REG_FAMILY ->       new RedisMessageFamilyRegister(this.protocolVersion, this.rawMessage, this.privateKey, this.address, this.origin, this.parameters);
-                default -> {
+            switch (this.type) {
+                case REG_ALL: // Fall through to PING
+                case PING:           return new GenericRedisMessage(this.protocolVersion, this.rawMessage, this.privateKey, this.type, this.address, this.origin);
+                case REG:       return new RedisMessageServerRegisterRequest(this.protocolVersion, this.rawMessage, this.privateKey, this.address, this.origin, this.parameters);
+                case UNREG:   return new RedisMessageServerUnregisterRequest(this.protocolVersion, this.rawMessage, this.privateKey, this.address, this.origin, this.parameters);
+                case SEND:                 return new RedisMessageSendPlayer(this.protocolVersion, this.rawMessage, this.privateKey, this.address, this.origin, this.parameters);
+                case PONG:                return new RedisMessageServerPong(this.protocolVersion, this.rawMessage, this.privateKey, this.address, this.origin, this.parameters);
+                case TPA_QUEUE_PLAYER: return new RedisMessageTPAQueuePlayer(this.protocolVersion, this.rawMessage, this.privateKey, this.address, this.origin, this.parameters);
+                case REG_FAMILY:       return new RedisMessageFamilyRegister(this.protocolVersion, this.rawMessage, this.privateKey, this.address, this.origin, this.parameters);
+                default: {
                     throw new IllegalStateException("Invalid RedisMessage type encountered!");
                 }
-            };
+            }
         }
 
         /**
@@ -219,18 +220,19 @@ public class GenericRedisMessage {
             if(this.origin == null) throw new IllegalStateException("You must provide `origin` when building a sendable RedisMessage!");
             // Specifically allow address to be set as `null`
 
-            return switch (this.type) {
-                case PING, REG_ALL ->           new GenericRedisMessage(this.type, this.address, this.origin);
-                case REG ->       new RedisMessageServerRegisterRequest(this.address, this.origin, this.parameters);
-                case UNREG ->   new RedisMessageServerUnregisterRequest(this.address, this.origin, this.parameters);
-                case SEND ->                 new RedisMessageSendPlayer(this.address, this.origin, this.parameters);
-                case PONG ->                 new RedisMessageServerPong(this.address, this.origin, this.parameters);
-                case TPA_QUEUE_PLAYER -> new RedisMessageTPAQueuePlayer(this.address, this.origin, this.parameters);
-                case REG_FAMILY ->       new RedisMessageFamilyRegister(this.address, this.origin, this.parameters);
-                default -> {
+            switch (this.type) {
+                case REG_ALL: // Fallthrough to PING
+                case PING:           return new GenericRedisMessage(this.type, this.address, this.origin);
+                case REG:       return new RedisMessageServerRegisterRequest(this.address, this.origin, this.parameters);
+                case UNREG:   return new RedisMessageServerUnregisterRequest(this.address, this.origin, this.parameters);
+                case SEND:                 return new RedisMessageSendPlayer(this.address, this.origin, this.parameters);
+                case PONG:                return new RedisMessageServerPong(this.address, this.origin, this.parameters);
+                case TPA_QUEUE_PLAYER: return new RedisMessageTPAQueuePlayer(this.address, this.origin, this.parameters);
+                case REG_FAMILY:      return new RedisMessageFamilyRegister(this.address, this.origin, this.parameters);
+                default: {
                     throw new IllegalStateException("Invalid RedisMessage type encountered!");
                 }
-            };
+            }
         }
     }
 
@@ -252,12 +254,12 @@ public class GenericRedisMessage {
                 JsonElement value = entry.getValue();
 
                 switch (key) {
-                    case MasterValidParameters.PROTOCOL_VERSION -> redisMessageBuilder.setProtocolVersion(value.getAsInt());
-                    case MasterValidParameters.PRIVATE_KEY -> redisMessageBuilder.setPrivateKey(value.getAsString().toCharArray());
-                    case MasterValidParameters.ADDRESS -> redisMessageBuilder.setAddress(value.getAsString());
-                    case MasterValidParameters.TYPE -> redisMessageBuilder.setType(RedisMessageType.valueOf(value.getAsString()));
-                    case MasterValidParameters.ORIGIN -> redisMessageBuilder.setOrigin(MessageOrigin.valueOf(value.getAsString()));
-                    case MasterValidParameters.PARAMETERS -> parseParams(value.getAsJsonObject(), redisMessageBuilder);
+                    case MasterValidParameters.PROTOCOL_VERSION: redisMessageBuilder.setProtocolVersion(value.getAsInt()); break;
+                    case MasterValidParameters.PRIVATE_KEY: redisMessageBuilder.setPrivateKey(value.getAsString().toCharArray()); break;
+                    case MasterValidParameters.ADDRESS: redisMessageBuilder.setAddress(value.getAsString()); break;
+                    case MasterValidParameters.TYPE: redisMessageBuilder.setType(RedisMessageType.valueOf(value.getAsString())); break;
+                    case MasterValidParameters.ORIGIN: redisMessageBuilder.setOrigin(MessageOrigin.valueOf(value.getAsString())); break;
+                    case MasterValidParameters.PARAMETERS: parseParams(value.getAsJsonObject(), redisMessageBuilder); break;
                 }
             });
 

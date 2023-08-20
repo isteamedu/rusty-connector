@@ -30,7 +30,45 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B package --file pom.xml
-
-    # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
-    - name: Update dependency graph
-      uses: advanced-security/maven-dependency-submission-action@571e99aab1055c2e71a1e2309b9691de18d6b7d6
+    - run: mkdir staging && cp target/*.jar staging
+    - uses: actions/upload-artifact@v3
+      with:
+        name: Package
+        path: staging
+  release:
+    name: release
+    if: contains(github.ref, 'tags/v')
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/download-artifact@master
+        with:
+          name: Package
+          path: staging
+      - name: Get the version
+        id: get_version
+        run: echo "VERSION=$(echo $GITHUB_REF | cut -d / -f 3)" >> $GITHUB_OUTPUT
+      - uses: montudor/action-zip@v1
+        with:
+          args: zip -r ${{ github.event.repository.name }}-${{ steps.get_version.outputs.VERSION }}.zip . -i staging/*
+      - name: release
+        uses: actions/create-release@v1
+        id: create_release
+        with:
+          draft: false
+          prerelease: false
+          release_name: Release ${{ steps.get_version.outputs.VERSION }}
+          tag_name: ${{ github.ref }}
+          body_path: releases/CHANGELOG-${{ steps.get_version.outputs.VERSION }}.md
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+      - name: upload artifacts
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ${{ github.event.repository.name }}-${{ steps.get_version.outputs.VERSION }}.zip
+          asset_name: ${{ github.event.repository.name }}-${{ steps.get_version.outputs.VERSION }}.zip
+          asset_content_type: application/zip

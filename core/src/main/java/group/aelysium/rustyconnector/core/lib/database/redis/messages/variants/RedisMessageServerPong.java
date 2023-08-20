@@ -34,8 +34,8 @@ public class RedisMessageServerPong extends GenericRedisMessage {
             JsonPrimitive value = entry.getValue();
 
             switch (key) {
-                case ValidParameters.SERVER_NAME -> this.serverName = value.getAsString();
-                case ValidParameters.PLAYER_COUNT -> this.playerCount = value.getAsInt();
+                case ValidParameters.SERVER_NAME: this.serverName = value.getAsString(); break;
+                case ValidParameters.PLAYER_COUNT: this.playerCount = value.getAsInt(); break;
             }
         });
     }
@@ -50,8 +50,8 @@ public class RedisMessageServerPong extends GenericRedisMessage {
             JsonPrimitive value = entry.getValue();
 
             switch (key) {
-                case ValidParameters.SERVER_NAME -> this.serverName = value.getAsString();
-                case ValidParameters.PLAYER_COUNT -> this.playerCount = value.getAsInt();
+                case ValidParameters.SERVER_NAME: this.serverName = value.getAsString(); break;
+                case ValidParameters.PLAYER_COUNT: this.playerCount = value.getAsInt(); break;
             }
         });
     }

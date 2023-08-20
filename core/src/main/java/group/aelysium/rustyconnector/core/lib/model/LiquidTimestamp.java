@@ -55,9 +55,9 @@ public class LiquidTimestamp {
     public long getEpochFromNow() {
         long time = Instant.now().getEpochSecond();
         switch (this.unit) {
-            case MONTHS -> time += ((long) this.value * 30 * 24 * 60 * 60);
-            case DAYS -> time += ((long) this.value * 24 * 60 * 60);
-            case HOURS -> time += ((long) this.value * 60);
+            case MONTHS: time += ((long) this.value * 30 * 24 * 60 * 60); break;
+            case DAYS: time += ((long) this.value * 24 * 60 * 60); break;
+            case HOURS: time += ((long) this.value * 60); break;
         }
 
         return time * 1000;

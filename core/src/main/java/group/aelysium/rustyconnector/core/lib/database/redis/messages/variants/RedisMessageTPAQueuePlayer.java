@@ -39,9 +39,9 @@ public class RedisMessageTPAQueuePlayer extends GenericRedisMessage {
             JsonPrimitive value = entry.getValue();
 
             switch (key) {
-                case ValidParameters.TARGET_SERVER -> this.targetServer = value.getAsString();
-                case ValidParameters.TARGET_USERNAME -> this.targetUsername = value.getAsString();
-                case ValidParameters.SOURCE_USERNAME -> this.sourceUsername = value.getAsString();
+                case ValidParameters.TARGET_SERVER: this.targetServer = value.getAsString(); break;
+                case ValidParameters.TARGET_USERNAME: this.targetUsername = value.getAsString(); break;
+                case ValidParameters.SOURCE_USERNAME: this.sourceUsername = value.getAsString(); break;
             }
         });
     }
@@ -56,9 +56,9 @@ public class RedisMessageTPAQueuePlayer extends GenericRedisMessage {
             JsonPrimitive value = entry.getValue();
 
             switch (key) {
-                case ValidParameters.TARGET_SERVER -> this.targetServer = value.getAsString();
-                case ValidParameters.TARGET_USERNAME -> this.targetUsername = value.getAsString();
-                case ValidParameters.SOURCE_USERNAME -> this.sourceUsername = value.getAsString();
+                case ValidParameters.TARGET_SERVER: this.targetServer = value.getAsString(); break;
+                case ValidParameters.TARGET_USERNAME: this.targetUsername = value.getAsString(); break;
+                case ValidParameters.SOURCE_USERNAME: this.sourceUsername = value.getAsString(); break;
             }
         });
     }
