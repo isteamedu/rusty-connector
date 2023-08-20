@@ -77,7 +77,7 @@
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>3.3.0</version>
                 <configuration>
-                    <source>16</source>
+                    <source>11</source>
                 </configuration>
             </plugin>
         </plugins>
