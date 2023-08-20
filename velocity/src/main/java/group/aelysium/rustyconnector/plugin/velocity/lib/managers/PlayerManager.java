@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 // This is a node manager of Players. The Players are of type: Velocity Player.
 public class PlayerManager implements NodeManager<Player> {
@@ -50,7 +51,7 @@ public class PlayerManager implements NodeManager<Player> {
 
     @Override
     public List<Player> dump() {
-        return this.registeredPlayers.values().stream().toList();
+        return this.registeredPlayers.values().stream().collect(Collectors.toList());
     }
 
     /**

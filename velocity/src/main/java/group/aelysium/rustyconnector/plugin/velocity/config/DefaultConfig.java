@@ -10,6 +10,7 @@ import net.kyori.adventure.text.format.NamedTextColor;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class DefaultConfig extends YAML {
     private static DefaultConfig config;
@@ -243,7 +244,7 @@ public class DefaultConfig extends YAML {
                 throw new IllegalStateException("All family names must be under 32 characters long! `" + familyName + "` was " + familyName.length());
         });
 
-        List<String> duplicates = this.families_scalar.stream().filter(this.families_static::contains).toList();
+        List<String> duplicates = this.families_scalar.stream().filter(this.families_static::contains).collect(Collectors.toList());
         if(duplicates.size() > 0)
             throw new IllegalStateException("You can't have two families with the same name! This rule is regardless of if the family is scalar or static! Duplicate family names: " + duplicates);
 

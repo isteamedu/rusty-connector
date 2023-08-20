@@ -53,6 +53,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class VirtualProxyProcessor implements VirtualProcessor {
     private MessageCache messageCache;
@@ -132,7 +133,7 @@ public class VirtualProxyProcessor implements VirtualProcessor {
      * @param player The player to uncache mappings for.
      */
     public void uncacheHomeServerMappings(Player player) {
-        List<BaseServerFamily> familyList = this.getFamilyManager().dump().stream().filter(family -> family instanceof StaticServerFamily).toList();
+        List<BaseServerFamily> familyList = this.getFamilyManager().dump().stream().filter(family -> family instanceof StaticServerFamily).collect(Collectors.toList());
         if(familyList.size() == 0) return;
 
         for (BaseServerFamily family : familyList) {

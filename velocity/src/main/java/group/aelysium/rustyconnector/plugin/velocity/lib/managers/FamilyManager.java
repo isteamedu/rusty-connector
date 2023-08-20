@@ -7,6 +7,7 @@ import group.aelysium.rustyconnector.plugin.velocity.lib.family.StaticServerFami
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class FamilyManager implements NodeManager<BaseServerFamily> {
     private final Map<String, BaseServerFamily> registeredFamilies = new HashMap<>();
@@ -41,7 +42,7 @@ public class FamilyManager implements NodeManager<BaseServerFamily> {
 
     @Override
     public List<BaseServerFamily> dump() {
-        return this.registeredFamilies.values().stream().toList();
+        return this.registeredFamilies.values().stream().collect(Collectors.toList());
     }
 
     @Override

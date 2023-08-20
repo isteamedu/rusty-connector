@@ -5,6 +5,7 @@ import group.aelysium.rustyconnector.plugin.velocity.lib.lang_messaging.Velocity
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TPAHandler {
     private final List<TPARequest> requests = new ArrayList<>();
@@ -35,7 +36,7 @@ public class TPAHandler {
     public List<TPARequest> findRequestsForTarget(Player target) {
         return this.requests.stream()
                 .filter(request -> request.getTarget().equals(target))
-                .toList();
+                .collect(Collectors.toList());
     }
 
     public TPARequest newRequest(Player sender, Player target) {

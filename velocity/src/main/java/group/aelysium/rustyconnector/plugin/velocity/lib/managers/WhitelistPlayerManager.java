@@ -6,6 +6,7 @@ import group.aelysium.rustyconnector.plugin.velocity.lib.module.WhitelistPlayer;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class WhitelistPlayerManager implements NodeManager<WhitelistPlayer> {
     private final Map<String, WhitelistPlayer> registeredPlayers = new HashMap<>();
@@ -38,7 +39,7 @@ public class WhitelistPlayerManager implements NodeManager<WhitelistPlayer> {
 
     @Override
     public List<WhitelistPlayer> dump() {
-        return this.registeredPlayers.values().stream().toList();
+        return this.registeredPlayers.values().stream().collect(Collectors.toList());
     }
 
     /**

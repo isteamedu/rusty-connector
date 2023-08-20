@@ -6,6 +6,7 @@ import group.aelysium.rustyconnector.core.lib.model.NodeManager;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class WhitelistManager implements NodeManager<Whitelist> {
     private final Map<String, Whitelist> registeredWhitelists = new HashMap<>();
@@ -41,7 +42,7 @@ public class WhitelistManager implements NodeManager<Whitelist> {
 
     @Override
     public List<Whitelist> dump() {
-        return this.registeredWhitelists.values().stream().toList();
+        return this.registeredWhitelists.values().stream().collect(Collectors.toList());
     }
 
     @Override
