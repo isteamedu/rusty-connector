@@ -10,7 +10,8 @@ name: Maven
 
 on:
   push:
-    branches: [ "main", "development" ]
+    branches: [ "main", "development", "v*" ]
+    tags: ["*"]
   pull_request:
     branches: [ "main", "development" ]
 
