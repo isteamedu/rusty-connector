@@ -44,7 +44,7 @@ public class YAML extends group.aelysium.rustyconnector.core.lib.config.YAML {
             logger.log("Finished registering "+this.configPointer.getName());
             return true;
         } catch (Exception e) {
-            logger.log("Failed to register: "+this.configPointer.getName());
+            logger.log("Failed to register: "+this.configPointer.getName()+ ":"+e.getMessage());
             return false;
         }
     }
