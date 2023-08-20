@@ -155,7 +155,7 @@ public class StaticServerFamily extends BaseServerFamily {
 
         StaticServerFamily family = null;
         switch (Enum.valueOf(AlgorithmType.class, staticFamilyConfig.getFirstConnection_loadBalancing_algorithm())) {
-            case ROUND_ROBIN -> family = new StaticServerFamily(
+            case ROUND_ROBIN: family = new StaticServerFamily(
                     familyName,
                     whitelist,
                     RoundRobin.class,
@@ -165,8 +165,8 @@ public class StaticServerFamily extends BaseServerFamily {
                     new TPASettings(staticFamilyConfig.isTPA_enabled(), staticFamilyConfig.shouldTPA_ignorePlayerCap(), staticFamilyConfig.getTPA_requestLifetime()),
                     staticFamilyConfig.getConsecutiveConnections_homeServer_ifUnavailable(),
                     staticFamilyConfig.getConsecutiveConnections_homeServer_expiration()
-            );
-            case LEAST_CONNECTION -> family = new StaticServerFamily(
+            ); break;
+            case LEAST_CONNECTION: family = new StaticServerFamily(
                     familyName,
                     whitelist,
                     LeastConnection.class,
@@ -176,7 +176,7 @@ public class StaticServerFamily extends BaseServerFamily {
                     new TPASettings(staticFamilyConfig.isTPA_enabled(), staticFamilyConfig.shouldTPA_ignorePlayerCap(), staticFamilyConfig.getTPA_requestLifetime()),
                     staticFamilyConfig.getConsecutiveConnections_homeServer_ifUnavailable(),
                     staticFamilyConfig.getConsecutiveConnections_homeServer_expiration()
-            );
+            ); break;
         }
 
         if(family == null) throw new RuntimeException("The name used for " + familyName + "'s load balancer is invalid!");
@@ -318,15 +318,15 @@ class StaticFamilyConnector {
                 return mapping.server();
             }
             switch (this.family.getUnavailableProtocol()) {
-                case ASSIGN_NEW_HOME -> {
+                case ASSIGN_NEW_HOME: {
                     this.family.unregisterHomeServer(this.player);
                     return this.establishNewConnection(true);
                 }
-                case CONNECT_WITH_ERROR -> {
+                case CONNECT_WITH_ERROR: {
                     this.postConnectionError = VelocityLang.MISSING_HOME_SERVER;
                     return this.establishNewConnection(false);
                 }
-                case CANCEL_CONNECTION_ATTEMPT -> {
+                case CANCEL_CONNECTION_ATTEMPT: {
                     player.sendMessage(VelocityLang.BLOCKED_STATIC_FAMILY_JOIN_ATTEMPT);
                     return null;
                 }

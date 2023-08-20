@@ -55,12 +55,13 @@ public final class CommandTPA {
 
         LiteralCommandNode<CommandSource> tpa = LiteralArgumentBuilder
                 .<CommandSource>literal("tpa")
-                .requires(source -> source instanceof Player)
+                .requires(source -> {if (source instanceof Player) {return true;} else {return false;}})
                 .executes(context -> {
-                    if(!(context.getSource() instanceof Player player)) {
+                    if(!(context.getSource() instanceof Player)) {
                         logger.log("/tpa must be sent as a player!");
                         return Command.SINGLE_SUCCESS;
                     }
+                    Player player = (Player) context.getSource();
 
                     if(!CommandTPA.tpaEnabled(player)) {
                         context.getSource().sendMessage(Lang.UNKNOWN_COMMAND);
@@ -93,8 +94,8 @@ public final class CommandTPA {
                         })
                         .then(RequiredArgumentBuilder.<CommandSource, String>argument("username", StringArgumentType.string())
                                 .suggests((context, builder) -> {
-                                    if(!(context.getSource() instanceof Player player)) return builder.buildFuture();
-
+                                    if(!(context.getSource() instanceof Player)) return builder.buildFuture();
+                                    Player player = (Player) context.getSource();
                                     try {
                                         ServerInfo sendingServer = ((Player) context.getSource()).getCurrentServer().orElseThrow().getServerInfo();
 
@@ -116,10 +117,11 @@ public final class CommandTPA {
                                     return builder.buildFuture();
                                 })
                                 .executes(context -> {
-                                    if(!(context.getSource() instanceof Player player)) {
+                                    if(!(context.getSource() instanceof Player)) {
                                         logger.log("/tpa must be sent as a player!");
                                         return Command.SINGLE_SUCCESS;
                                     }
+                                    Player player = (Player) context.getSource();
 
                                     if(!CommandTPA.tpaEnabled(player)) {
                                         context.getSource().sendMessage(Lang.UNKNOWN_COMMAND);
@@ -167,10 +169,11 @@ public final class CommandTPA {
                 )
                 .then(LiteralArgumentBuilder.<CommandSource>literal("accept")
                         .executes(context -> {
-                            if(!(context.getSource() instanceof Player player)) {
+                            if(!(context.getSource() instanceof Player)) {
                                 logger.log("/tpa must be sent as a player!");
                                 return Command.SINGLE_SUCCESS;
                             }
+                            Player player = (Player) context.getSource();
 
                             if(!CommandTPA.tpaEnabled(player)) {
                                 context.getSource().sendMessage(Lang.UNKNOWN_COMMAND);
@@ -187,8 +190,8 @@ public final class CommandTPA {
                         })
                         .then(RequiredArgumentBuilder.<CommandSource, String>argument("username", StringArgumentType.string())
                                 .suggests((context, builder) -> {
-                                    if(!(context.getSource() instanceof Player player)) return builder.buildFuture();
-
+                                    if(!(context.getSource() instanceof Player)) return builder.buildFuture();
+                                    Player player = (Player) context.getSource();
                                     try {
                                         ServerInfo sendingServer = ((Player) context.getSource()).getCurrentServer().orElseThrow().getServerInfo();
 
@@ -269,10 +272,11 @@ public final class CommandTPA {
                             return builder.buildFuture();
                         })
                         .executes(context -> {
-                            if(!(context.getSource() instanceof Player player)) {
+                            if(!(context.getSource() instanceof Player)) {
                                 logger.log("/tpa must be sent as a player!");
                                 return Command.SINGLE_SUCCESS;
                             }
+                            Player player = (Player) context.getSource();
 
                             if(!CommandTPA.tpaEnabled(player)) {
                                 context.getSource().sendMessage(Lang.UNKNOWN_COMMAND);

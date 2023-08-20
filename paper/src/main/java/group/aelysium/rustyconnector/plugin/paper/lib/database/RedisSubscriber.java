@@ -59,10 +59,10 @@ public class RedisSubscriber extends group.aelysium.rustyconnector.core.lib.data
 
         try {
             switch (message.getType()) {
-                case REG_ALL -> new ServerRegAllHandler(message).execute();
-                case REG_FAMILY -> new ServerRegFamilyHandler(message).execute();
-                case PING -> new PingHandler(message).execute();
-                case TPA_QUEUE_PLAYER -> new TPAQueuePlayerHandler(message).execute();
+                case REG_ALL: new ServerRegAllHandler(message).execute(); break;
+                case REG_FAMILY: new ServerRegFamilyHandler(message).execute(); break;
+                case PING: new PingHandler(message).execute(); break;
+                case TPA_QUEUE_PLAYER: new TPAQueuePlayerHandler(message).execute(); break;
             }
 
             cachedMessage.sentenceMessage(MessageStatus.EXECUTED);

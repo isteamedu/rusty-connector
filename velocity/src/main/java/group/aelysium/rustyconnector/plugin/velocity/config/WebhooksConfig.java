@@ -60,8 +60,8 @@ public class WebhooksConfig extends YAML {
 
                 for (WebhookAlertFlag flag : correctFlags) {
                     switch (scope) {
-                        case PROXY -> WebhookEventManager.on(flag, webhook);
-                        case FAMILY -> {
+                        case PROXY: WebhookEventManager.on(flag, webhook); break;
+                        case FAMILY: {
                             String familyName = this.getNode(node, "target-family", String.class);
 
                             BaseServerFamily family = api.getVirtualProcessor().getFamilyManager().find(familyName);
@@ -69,6 +69,7 @@ public class WebhooksConfig extends YAML {
                                 logger.warn("webhooks.yml is pointing a webhook at a family with the name: " + familyName + ". No family with this name exists!");
 
                             WebhookEventManager.on(flag, familyName, webhook);
+                            break;
                         }
                     }
                 }

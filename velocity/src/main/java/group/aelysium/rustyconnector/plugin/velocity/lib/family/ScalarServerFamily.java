@@ -66,7 +66,7 @@ public class ScalarServerFamily extends BaseServerFamily {
         }
 
         switch (Enum.valueOf(AlgorithmType.class, scalarFamilyConfig.getLoadBalancing_algorithm())) {
-            case ROUND_ROBIN -> {
+            case ROUND_ROBIN: {
                 return new ScalarServerFamily(
                         familyName,
                         whitelist,
@@ -77,7 +77,7 @@ public class ScalarServerFamily extends BaseServerFamily {
                         new TPASettings(scalarFamilyConfig.isTPA_enabled(), scalarFamilyConfig.shouldTPA_ignorePlayerCap(), scalarFamilyConfig.getTPA_requestLifetime())
                 );
             }
-            case LEAST_CONNECTION -> {
+            case LEAST_CONNECTION: {
                 return new ScalarServerFamily(
                         familyName,
                         whitelist,
@@ -88,7 +88,7 @@ public class ScalarServerFamily extends BaseServerFamily {
                         new TPASettings(scalarFamilyConfig.isTPA_enabled(), scalarFamilyConfig.shouldTPA_ignorePlayerCap(), scalarFamilyConfig.getTPA_requestLifetime())
                 );
             }
-            default -> throw new RuntimeException("The name used for "+familyName+"'s load balancer is invalid!");
+            default: throw new RuntimeException("The name used for "+familyName+"'s load balancer is invalid!");
         }
     }
     @Override

@@ -80,10 +80,10 @@ public class RedisSubscriber extends group.aelysium.rustyconnector.core.lib.data
 
         try {
             switch (message.getType()) {
-                case REG -> new ServerRegHandler(message).execute();
-                case UNREG -> new ServerUnRegHandler(message).execute();
-                case SEND -> new SendPlayerHandler(message).execute();
-                case PONG -> new PongHandler(message).execute();
+                case REG: new ServerRegHandler(message).execute(); break;
+                case UNREG: new ServerUnRegHandler(message).execute(); break;
+                case SEND: new SendPlayerHandler(message).execute(); break;
+                case PONG: new PongHandler(message).execute(); break;
             }
 
             cachedMessage.sentenceMessage(MessageStatus.EXECUTED);
