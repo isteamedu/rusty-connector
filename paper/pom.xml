@@ -71,6 +71,11 @@
             <artifactId>cloud-paper</artifactId>
             <version>1.8.0</version>
         </dependency>
+        <dependency>
+            <groupId>net.kyori</groupId>
+            <artifactId>adventure-api</artifactId>
+            <version>4.14.0</version>
+         </dependency>
     </dependencies>
     <profiles>
         <profile>
@@ -88,7 +93,6 @@
                 </resource>
                 <resource>
                     <directory>src/main/resources</directory>
-                    <filtering>true</filtering>
                 </resource>
             </resources>
             <plugins>
